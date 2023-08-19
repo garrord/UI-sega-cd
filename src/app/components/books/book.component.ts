@@ -3,17 +3,18 @@ import { SafeUrl } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
-    selector: 'game-component',
-    templateUrl: 'game.component.html'
+    selector: 'book-component',
+    templateUrl: 'book.component.html'
 })
 
-export class GameComponent implements OnInit {
+export class BookComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute){}
 
     @Input() images: SafeUrl[] = [];
 
     ngOnInit(): void {
+        this.images;
         // let title = this.activatedRoute.snapshot.paramMap.get('game');
         // console.log(title);
     }

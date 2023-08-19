@@ -1,5 +1,6 @@
 export enum ImageContentEnum{
-    books,
-    music,
-    retailRelease
+    Books,
+    Music,
+    Contents,
+    RetailRelease
 }

@@ -1,47 +1,38 @@
-<div *ngIf="isComplete; else spinner">
-    <book-component
-        [images]="images"
-    ></book-component>
-</div>
-
-<ng-template #spinner>
-    <mat-spinner></mat-spinner>
-</ng-template>
-
-
-<!-- <mat-tab-group>
-    <mat-tab label="Retail">
+<mat-tab-group>
+    <!-- <mat-tab label="Retail">
         <div class="container">
             <img class="picture" src="{{ game!.retailCoverFront }}">
             <img class="picture" src="{{ game!.retailCoverBack }}">
             <img class="picture" src="{{ game!.retailDisc }}">
         </div>
-    </mat-tab>
-    <mat-tab *ngIf="game!.variants.length > 0" label="Variants">
+    </mat-tab> -->
+    <!-- <mat-tab *ngIf="game!.variants.length > 0" label="Variants">
         <div *ngFor="let variant of game!.variants">
             <img src="{{ variant }}">
         </div>
-    </mat-tab>
-    <mat-tab *ngIf="game!.advertisements.length > 0" label="Advertisements">
+    </mat-tab> -->
+    <!-- <mat-tab *ngIf="game!.advertisements.length > 0" label="Advertisements">
         <div class="container" *ngFor="let advertisement of game!.advertisements">
             <img class="advertisement" src="{{ advertisement }}">
         </div>
-    </mat-tab>
-    <mat-tab *ngIf="game!.advertisements.length > 0" label="Advertisements">
+    </mat-tab> -->
+    <!-- <mat-tab *ngIf="game!.advertisements.length > 0" label="Advertisements">
         <div class="container">
             <div *ngFor="let advertisement of game!.advertisements">
                 <img class="advertisement" src="{{ advertisement }}">
             </div>
         </div>
-    </mat-tab>
-    <mat-tab label="Books">
-        <book-component *ngIf="isComplete"
-            [images]="images"
+    </mat-tab> -->
+    <mat-tab *ngIf="isCompleted" label="Books">
+        <book-component
+            [content]="0"
+            [ids]="ids"
         ></book-component>
     </mat-tab>
-    <mat-tab label="Music">
-         <game-container
+    <mat-tab *ngIf="isCompleted" label="Music">
+        <game-container
+            [content]="1"
             [ids]="ids"
         ></game-container>
     </mat-tab>
-</mat-tab-group> -->
+</mat-tab-group>

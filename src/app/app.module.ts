@@ -13,6 +13,9 @@ import { GameTableContainer } from './containers/table/game-table.container';
 import { GameTableComponent } from './components/table/game-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon'
+import { RouterModule } from '@angular/router';
+import { MatTabsModule } from '@angular/material/tabs';
+import { BookComponent } from './components/books/book.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import { MatIconModule } from '@angular/material/icon'
     GameContainer,
     GameComponent,
     GameTableContainer,
-    GameTableComponent
+    GameTableComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +34,12 @@ import { MatIconModule } from '@angular/material/icon'
     BrowserAnimationsModule,
     MatTableModule,
     MatIconModule,
+    MatTabsModule,
+    RouterModule.forRoot([
+      { path: 'games', component: GameTableContainer },
+      { path: '', redirectTo: 'games', pathMatch: 'full' },
+      { path:  ':game', component: GameContainer }
+    ])
   ],
   providers: [
     ImageService,

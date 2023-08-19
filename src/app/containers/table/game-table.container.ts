@@ -17,7 +17,7 @@ export class GameTableContainer implements OnInit, OnDestroy{
     isComplete: boolean = false;
 
     ngOnInit(): void {
-        this.gameService.getAllGames().subscribe({
+        this.allGamesSubscription = this.gameService.getAllGames().subscribe({
             next: (x) => this.games = x,
             error: (x) => console.log(x),
             complete: () => this.isComplete = true
