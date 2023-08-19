@@ -1,0 +1,8 @@
+<game-table-component
+    *ngIf="isComplete; else spinner"
+    [games]="games"
+></game-table-component>
+
+<ng-template #spinner>
+    <mat-spinner></mat-spinner>
+</ng-template>

@@ -1,0 +1,9 @@
+<div *ngIf="isComplete; else spinner">
+    <game-component
+        [images]="images"
+    ></game-component>
+</div>
+
+<ng-template #spinner>
+    <mat-spinner></mat-spinner>
+</ng-template>
