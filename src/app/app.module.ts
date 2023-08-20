@@ -16,6 +16,12 @@ import { MatIconModule } from '@angular/material/icon'
 import { RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BookComponent } from './components/books/book.component';
+import { GameContainerComponent } from './containerComponents/game.container.component';
+import { MusicContainer } from './containers/music/music.container';
+import { MusicComponent } from './components/music/music.component';
+import { BookContainer } from './containers/books/book.container';
+import { RetailContainer } from './containers/retail/retail.container';
+import { RetailComponent } from './components/retail/retail.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +30,13 @@ import { BookComponent } from './components/books/book.component';
     GameComponent,
     GameTableContainer,
     GameTableComponent,
-    BookComponent
+    BookComponent,
+    GameContainerComponent,
+    MusicContainer,
+    MusicComponent,
+    BookContainer,
+    RetailContainer,
+    RetailComponent
   ],
   imports: [
     BrowserModule,

@@ -6,11 +6,11 @@ import { ImageContentEnum } from "../../enums/image-content.enum";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
-    selector: 'game-container',
-    templateUrl: 'game.container.html'
+    selector: 'book-container',
+    templateUrl: 'book.container.html'
 })
 
-export class GameContainer implements OnInit, OnDestroy {
+export class BookContainer implements OnInit, OnDestroy {
 
     constructor(
         private imageService: ImageService,
@@ -26,22 +26,24 @@ export class GameContainer implements OnInit, OnDestroy {
     content: number = ImageContentEnum.Books;
 
     ngOnInit(): void {
-        // let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
-        // this.getIds(title!);
-        // this.bookIdsSubscription = this.imageService.getImageIds(title!, this.content).subscribe({
-        //     next:(x: number[]) => this.ids = x,
-        //     error: (x: string) => console.log(x),
-        //     complete: () => {
-        //         if (this.ids.length > 0){
-        //             this.getImages(this.ids, this.content)
-        //         }
-        //     }
-        // })
+        let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
+        this.bookIdsSubscription = this.imageService.getBookIds(title!).subscribe({
+            next:(x: number[]) => this.ids = x,
+            error: (x: string) => console.log(x),
+            complete: () => {
+                if (this.ids.length > 0){
+                    this.getImages(this.ids, this.content)
+                }
+                else{
+                    this.isComplete = true;
+                }
+            }
+        })
     }
 
     getImages(ids: number[], content:number){
         ids.forEach(id => {
-            this.bookImagesSubscription = this.imageService.getImages(id, content).subscribe({
+            this.bookImagesSubscription = this.imageService.getBookImage(id).subscribe({
                 next: (x: Blob) => { 
                     const objectUrl = URL.createObjectURL(x);
                     const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
@@ -53,17 +55,17 @@ export class GameContainer implements OnInit, OnDestroy {
         })
     }
 
-    getIds(title:string):void{
-        this.bookIdsSubscription = this.imageService.getImageIds(title, this.content).subscribe({
-            next:(x: number[]) => this.ids = x,
-            error: (x: string) => console.log(x),
-            complete: () => {
-                if (this.ids.length > 0){
-                    this.getImages(this.ids, this.content)
-                }
-            }
-        })
-    }
+    // getIds(title:string):void{
+    //     this.bookIdsSubscription = this.imageService.getImageIds(title, this.content).subscribe({
+    //         next:(x: number[]) => this.ids = x,
+    //         error: (x: string) => console.log(x),
+    //         complete: () => {
+    //             if (this.ids.length > 0){
+    //                 this.getImages(this.ids, this.content)
+    //             }
+    //         }
+    //     })
+    // }
 
     ngOnDestroy(): void{
         this.bookIdsSubscription.unsubscribe();

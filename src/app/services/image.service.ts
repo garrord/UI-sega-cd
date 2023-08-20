@@ -19,4 +19,24 @@ export class ImageService{
     public getImageIds(title: string, content: ImageContentEnum): Observable<number[]>{
         return this.http.get<number[]>(`${this.baseUrl}/getImageIds/${content}/${title}`);
     }
+
+    public getMusicIds(title: string): Observable<number[]>{
+        return this.http.get<number[]>(`${this.baseUrl}/getMusicIds/${title}`);
+    }
+
+    public getBookIds(title: string): Observable<number[]>{
+        return this.http.get<number[]>(`${this.baseUrl}/getBookIds/${title}`);
+    }
+
+    public getBookImage(id: number):Observable<Blob>{
+        return this.http.get(`${this.baseUrl}/getBookImage/${id}`, { responseType:'blob' });
+    }
+
+    public getMusicImage(id: number):Observable<Blob>{
+        return this.http.get(`${this.baseUrl}/getMusicImage/${id}`, { responseType:'blob' });
+    }
+
+    public getRetailImage(name: string, isFront:boolean):Observable<Blob>{
+        return this.http.get(`${this.baseUrl}/getRetailImage/${name}/${isFront ? "front" : "back"}`, { responseType:'blob' });
+    }
 }

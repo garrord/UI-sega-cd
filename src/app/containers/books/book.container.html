@@ -1,0 +1,7 @@
+<book-component *ngIf="isComplete; else spinner"
+    [images]="images"
+></book-component>
+
+<ng-template #spinner>
+    <mat-spinner></mat-spinner>
+</ng-template>

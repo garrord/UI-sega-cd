@@ -1,11 +1,11 @@
-<mat-tab-group>
-    <!-- <mat-tab label="Retail">
+<mat-tab-group  (selectedTabChange)="reload()">
+    <mat-tab label="Retail">
         <div class="container">
-            <img class="picture" src="{{ game!.retailCoverFront }}">
+            <!-- <img class="picture" src="{{ game!.retailCoverFront }}">
             <img class="picture" src="{{ game!.retailCoverBack }}">
-            <img class="picture" src="{{ game!.retailDisc }}">
+            <img class="picture" src="{{ game!.retailDisc }}"> -->
         </div>
-    </mat-tab> -->
+    </mat-tab>
     <!-- <mat-tab *ngIf="game!.variants.length > 0" label="Variants">
         <div *ngFor="let variant of game!.variants">
             <img src="{{ variant }}">
@@ -24,15 +24,13 @@
         </div>
     </mat-tab> -->
     <mat-tab *ngIf="isCompleted" label="Books">
-        <book-component
-            [content]="0"
-            [ids]="ids"
-        ></book-component>
+        <div>
+            <game-container
+            ></game-container>
+        </div>
     </mat-tab>
     <mat-tab *ngIf="isCompleted" label="Music">
         <game-container
-            [content]="1"
-            [ids]="ids"
         ></game-container>
     </mat-tab>
 </mat-tab-group>

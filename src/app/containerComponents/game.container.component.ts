@@ -40,6 +40,11 @@ export class GameContainerComponent implements OnInit{
         })
     }
 
+    reload(){
+        console.log("selected new tab");
+        this.getIds();
+    }
+
     ngOnDestroy(): void{
         this.bookIdsSubscription.unsubscribe();
         //this.bookImagesSubscription.unsubscribe();
