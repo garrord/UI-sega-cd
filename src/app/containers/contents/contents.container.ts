@@ -6,11 +6,11 @@ import { ImageContentEnum } from "../../enums/image-content.enum";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
-    selector: 'book-container',
-    templateUrl: 'book.container.html'
+    selector: 'contents-container',
+    templateUrl: 'contents.container.html'
 })
 
-export class BookContainer implements OnInit, OnDestroy {
+export class ContentsContainer implements OnInit, OnDestroy {
 
     constructor(
         private imageService: ImageService,
@@ -21,13 +21,13 @@ export class BookContainer implements OnInit, OnDestroy {
     images: SafeUrl[] = [];
     isComplete: boolean = false;
     ids: number[] = [];
-    bookIdsSubscription!: Subscription;
-    bookImagesSubscription!: Subscription;
+    contentIdsSubscription!: Subscription;
+    contentImagesSubscription!: Subscription;
     content: number = ImageContentEnum.Books;
 
     ngOnInit(): void {
         let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
-        this.bookIdsSubscription = this.imageService.getBookIds(title!).subscribe({
+        this.contentIdsSubscription = this.imageService.getContentIds(title!).subscribe({
             next:(x: number[]) => this.ids = x,
             error: (x: string) => console.log(x),
             complete: () => {
@@ -43,7 +43,7 @@ export class BookContainer implements OnInit, OnDestroy {
 
     getImages(ids: number[], content:number){
         ids.forEach(id => {
-            this.bookImagesSubscription = this.imageService.getBookImage(id).subscribe({
+            this.contentImagesSubscription = this.imageService.getContentImage(id).subscribe({
                 next: (x: Blob) => { 
                     const objectUrl = URL.createObjectURL(x);
                     const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
@@ -56,7 +56,7 @@ export class BookContainer implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void{
-        this.bookIdsSubscription.unsubscribe();
-        this.bookImagesSubscription.unsubscribe();
+        this.contentIdsSubscription.unsubscribe();
+        this.contentImagesSubscription.unsubscribe();
     }
 }

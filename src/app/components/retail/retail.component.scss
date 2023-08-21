@@ -1,0 +1,19 @@
+.container{
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
+    grid-template-areas: '. front back .';
+    width:100vw;
+    justify-items: center;
+}
+
+.front {
+    max-width:80%;
+    grid-area: front;
+    margin-top:1%;
+}
+
+.back {
+    max-width:80%;
+    grid-area: back;
+    margin-top:1%;
+}

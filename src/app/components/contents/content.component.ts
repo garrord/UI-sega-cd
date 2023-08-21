@@ -2,11 +2,11 @@ import { Component, Input } from "@angular/core";
 import { SafeUrl } from "@angular/platform-browser";
 
 @Component({
-    selector: 'book-component',
-    templateUrl: 'book.component.html',
-    styleUrls: ['book.component.scss']
+    selector: 'content-component',
+    templateUrl: 'content.component.html',
+    styleUrls:['content.component.scss']
 })
 
-export class BookComponent {
+export class ContentComponent{
     @Input() images: SafeUrl[] = [];
 }

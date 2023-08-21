@@ -16,12 +16,14 @@ import { MatIconModule } from '@angular/material/icon'
 import { RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BookComponent } from './components/books/book.component';
-import { GameContainerComponent } from './containerComponents/game.container.component';
 import { MusicContainer } from './containers/music/music.container';
 import { MusicComponent } from './components/music/music.component';
 import { BookContainer } from './containers/books/book.container';
 import { RetailContainer } from './containers/retail/retail.container';
 import { RetailComponent } from './components/retail/retail.component';
+import  {MatButtonModule } from '@angular/material/button';
+import { ContentsContainer } from './containers/contents/contents.container';
+import { ContentComponent } from './components/contents/content.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +33,13 @@ import { RetailComponent } from './components/retail/retail.component';
     GameTableContainer,
     GameTableComponent,
     BookComponent,
-    GameContainerComponent,
     MusicContainer,
     MusicComponent,
     BookContainer,
     RetailContainer,
-    RetailComponent
+    RetailComponent,
+    ContentsContainer,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { RetailComponent } from './components/retail/retail.component';
     MatTableModule,
     MatIconModule,
     MatTabsModule,
+    MatButtonModule,
     RouterModule.forRoot([
       { path: 'games', component: GameTableContainer },
       { path: '', redirectTo: 'games', pathMatch: 'full' },

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { SafeUrl } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 
@@ -7,14 +7,8 @@ import { ActivatedRoute } from "@angular/router";
     templateUrl: 'game.component.html'
 })
 
-export class GameComponent implements OnInit {
+export class GameComponent {
 
     constructor(private activatedRoute: ActivatedRoute){}
-
     @Input() images: SafeUrl[] = [];
-
-    ngOnInit(): void {
-        // let title = this.activatedRoute.snapshot.paramMap.get('game');
-        // console.log(title);
-    }
 }

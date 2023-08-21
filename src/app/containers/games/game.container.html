@@ -1,35 +1,27 @@
-<mat-tab-group>
-    <!-- <mat-tab label="Retail">
-        <div class="container">
-            <img class="picture" src="{{ game!.retailCoverFront }}">
-            <img class="picture" src="{{ game!.retailCoverBack }}">
-            <img class="picture" src="{{ game!.retailDisc }}">
-        </div>
-    </mat-tab>
-    <mat-tab *ngIf="game!.variants.length > 0" label="Variants">
+<div>
+    <button mat-raised-button (click)="backToList()">Back</button>
+</div>
+
+<mat-tab-group *ngIf="isComplete; else spinner">
+    <!-- <mat-tab *ngIf="game!.variants.length > 0" label="Variants">
         <div *ngFor="let variant of game!.variants">
             <img src="{{ variant }}">
-        </div>
-    </mat-tab>
-    <mat-tab *ngIf="game!.advertisements.length > 0" label="Advertisements">
-        <div class="container" *ngFor="let advertisement of game!.advertisements">
-            <img class="advertisement" src="{{ advertisement }}">
-        </div>
-    </mat-tab>
-    <mat-tab *ngIf="game!.advertisements.length > 0" label="Advertisements">
-        <div class="container">
-            <div *ngFor="let advertisement of game!.advertisements">
-                <img class="advertisement" src="{{ advertisement }}">
-            </div>
         </div>
     </mat-tab> -->
     <mat-tab label="Retail">
         <retail-container></retail-container>
     </mat-tab>
-    <mat-tab label="Books">
+    <mat-tab label="Books" *ngIf="videoGameDetails.hasBooks">
         <book-container></book-container>
     </mat-tab>
-    <mat-tab label="Music">
+    <mat-tab label="Music" *ngIf="videoGameDetails.hasMusic">
          <music-container></music-container>
     </mat-tab>
+    <mat-tab label="Contents" *ngIf="videoGameDetails.hasContents">
+        <contents-container></contents-container>
+   </mat-tab>
 </mat-tab-group>
+
+<ng-template #spinner>
+    <mat-spinner></mat-spinner>
+</ng-template>

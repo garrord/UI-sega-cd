@@ -11,7 +11,6 @@ export class ImageService{
 
     private baseUrl = 'https://localhost:7062/api/image';
 
-
     public getImages(id:number, content: ImageContentEnum):Observable<Blob>{
         return this.http.get(`${this.baseUrl}/getImages/${id}`, { responseType:'blob' });
     }
@@ -38,5 +37,13 @@ export class ImageService{
 
     public getRetailImage(name: string, isFront:boolean):Observable<Blob>{
         return this.http.get(`${this.baseUrl}/getRetailImage/${name}/${isFront ? "front" : "back"}`, { responseType:'blob' });
+    }
+
+    public getContentIds(name: string):Observable<number[]>{
+        return this.http.get<number[]>(`${this.baseUrl}/getContentsIds/${name}`);
+    }
+
+    public getContentImage(id:number):Observable<Blob>{
+        return this.http.get(`${this.baseUrl}/getContentImage/${id}`, { responseType:'blob' });
     }
 }

@@ -1,9 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { ImageService } from "../../services/image.service";
-import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { ImageContentEnum } from "../../enums/image-content.enum";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { GameService } from "src/app/services/game.service";
+import { VideoGameDetailsModel } from "src/app/models/video-game-details.model";
 
 @Component({
     selector: 'game-container',
@@ -13,60 +12,29 @@ import { ActivatedRoute } from "@angular/router";
 export class GameContainer implements OnInit, OnDestroy {
 
     constructor(
-        private imageService: ImageService,
-        private sanitizer: DomSanitizer,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private gameService: GameService,
+        private router: Router
     ){}
 
-    images: SafeUrl[] = [];
     isComplete: boolean = false;
-    ids: number[] = [];
-    bookIdsSubscription!: Subscription;
-    bookImagesSubscription!: Subscription;
-    content: number = ImageContentEnum.Books;
+    gameDetailsSubscription!: Subscription;
+    videoGameDetails!: VideoGameDetailsModel;
 
     ngOnInit(): void {
-        // let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
-        // this.getIds(title!);
-        // this.bookIdsSubscription = this.imageService.getImageIds(title!, this.content).subscribe({
-        //     next:(x: number[]) => this.ids = x,
-        //     error: (x: string) => console.log(x),
-        //     complete: () => {
-        //         if (this.ids.length > 0){
-        //             this.getImages(this.ids, this.content)
-        //         }
-        //     }
-        // })
-    }
-
-    getImages(ids: number[], content:number){
-        ids.forEach(id => {
-            this.bookImagesSubscription = this.imageService.getImages(id, content).subscribe({
-                next: (x: Blob) => { 
-                    const objectUrl = URL.createObjectURL(x);
-                    const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
-                    this.images.push(imageUrl);
-                },
-                error: (x) => console.log(x),
-                complete: () => this.isComplete = true
-            })
-        })
-    }
-
-    getIds(title:string):void{
-        this.bookIdsSubscription = this.imageService.getImageIds(title, this.content).subscribe({
-            next:(x: number[]) => this.ids = x,
-            error: (x: string) => console.log(x),
-            complete: () => {
-                if (this.ids.length > 0){
-                    this.getImages(this.ids, this.content)
-                }
-            }
-        })
+        let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
+        this.gameDetailsSubscription = this.gameService.getVideoGameDetails(title!).subscribe({
+            next: (x) => this.videoGameDetails = x,
+            error: (x) => console.log(x),
+            complete: () => this.isComplete = true
+        });
     }
 
     ngOnDestroy(): void{
-        this.bookIdsSubscription.unsubscribe();
-        this.bookImagesSubscription.unsubscribe();
+        this.gameDetailsSubscription.unsubscribe();
+    }
+
+    backToList():void{
+        this.router.navigate(['/games']);
     }
 }

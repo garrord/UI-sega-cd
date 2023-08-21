@@ -26,7 +26,7 @@ export class RetailContainer implements OnInit, OnDestroy{
 
     ngOnInit(): void {
         this.title = this.activateRoute.snapshot.paramMap.get('game');
-        this.imageService.getRetailImage(this.title!, true).subscribe({
+        this.frontImageSubscription = this.imageService.getRetailImage(this.title!, true).subscribe({
             next: (x) => {
                 const objectUrl = URL.createObjectURL(x);
                 const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
@@ -37,11 +37,10 @@ export class RetailContainer implements OnInit, OnDestroy{
                 this.getBackCover();
             }
         });
-      
     }
 
     getBackCover():void{
-        this.imageService.getRetailImage(this.title!, false).subscribe({
+        this.backImageSubscription = this.imageService.getRetailImage(this.title!, false).subscribe({
             next: (x) => {
                 const objectUrl = URL.createObjectURL(x);
                 const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
@@ -58,5 +57,4 @@ export class RetailContainer implements OnInit, OnDestroy{
         this.frontImageSubscription.unsubscribe();
         this.backImageSubscription.unsubscribe();
     }
-
 }

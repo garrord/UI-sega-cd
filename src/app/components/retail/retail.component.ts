@@ -3,7 +3,8 @@ import { SafeUrl } from "@angular/platform-browser";
 
 @Component({
     selector: 'retail-component',
-    templateUrl: 'retail.component.html'
+    templateUrl: 'retail.component.html',
+    styleUrls: ['retail.component.scss']
 })
 
 export class RetailComponent{

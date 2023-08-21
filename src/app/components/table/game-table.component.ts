@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
-import { ActivatedRoute, Router } from "@angular/router";
-import { ImageContentEnum } from "src/app/enums/image-content.enum";
+import { Router } from "@angular/router";
 import { VideoGameRetailModel } from "src/app/models/video-game-retail.model";
 
 @Component({
     selector: 'game-table-component',
-    templateUrl: 'game-table.component.html'
+    templateUrl: 'game-table.component.html',
+    styleUrls:['game-table.component.scss']
 })
 
 export class GameTableComponent implements OnInit {
