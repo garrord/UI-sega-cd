@@ -5,4 +5,6 @@ export class VideoGameRetailModel{
     isArcadePort!:boolean;
     isUsExclusive!:boolean;
     publisher!:string;
+    hasBooks!:boolean;
+    hasMusic!:boolean;
 }

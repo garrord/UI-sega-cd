@@ -24,6 +24,8 @@ import { RetailComponent } from './components/retail/retail.component';
 import  {MatButtonModule } from '@angular/material/button';
 import { ContentsContainer } from './containers/contents/contents.container';
 import { ContentComponent } from './components/contents/content.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BookDialog } from './components/dialogs/book.dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { ContentComponent } from './components/contents/content.component';
     RetailContainer,
     RetailComponent,
     ContentsContainer,
-    ContentComponent
+    ContentComponent,
+    BookDialog
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ import { ContentComponent } from './components/contents/content.component';
     MatIconModule,
     MatTabsModule,
     MatButtonModule,
+    MatDialogModule,
     RouterModule.forRoot([
       { path: 'games', component: GameTableContainer },
       { path: '', redirectTo: 'games', pathMatch: 'full' },
