@@ -20,10 +20,12 @@ export class GameContainer implements OnInit, OnDestroy {
     isComplete: boolean = false;
     gameDetailsSubscription!: Subscription;
     videoGameDetails!: VideoGameDetailsModel;
+    title!:string | null;
 
     ngOnInit(): void {
-        let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
-        this.gameDetailsSubscription = this.gameService.getVideoGameDetails(title!).subscribe({
+        this.title = this.activatedRoute.snapshot.paramMap.get('game');
+        //this.title = encodeURI(t!);
+        this.gameDetailsSubscription = this.gameService.getVideoGameDetails(this.title!).subscribe({
             next: (x) => this.videoGameDetails = x,
             error: (x) => console.log(x),
             complete: () => this.isComplete = true

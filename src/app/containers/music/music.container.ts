@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -17,6 +17,7 @@ export class MusicContainer implements OnInit, OnDestroy{
         private sanitizer: DomSanitizer
     ){}
 
+    @Input() title!:string | null;
     musicIdSubscription!: Subscription;
     musicImageSubscription!: Subscription;
     ids: number[] = [];
@@ -24,8 +25,8 @@ export class MusicContainer implements OnInit, OnDestroy{
     isComplete: boolean = false;
 
     ngOnInit(): void {
-        let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
-        this.musicIdSubscription = this.imageService.getMusicIds(title!).subscribe({
+        //let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
+        this.musicIdSubscription = this.imageService.getMusicIds(this.title!).subscribe({
             next: (x) => this.ids = x,
             error: (x) => console.log(x),
             complete: () => {

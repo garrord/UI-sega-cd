@@ -46,4 +46,12 @@ export class ImageService{
     public getContentImage(id:number):Observable<Blob>{
         return this.http.get(`${this.baseUrl}/getContentImage/${id}`, { responseType:'blob' });
     }
+
+    getGeneralBookIds():Observable<number[]>{
+        return this.http.get<number[]>(`${this.baseUrl}/getGeneralBookIds`);
+    }
+
+    getGeneralBookImage(id:number):Observable<Blob>{
+        return this.http.get(`${this.baseUrl}/getGeneralBookImage/${id}`, { responseType:'blob' });
+    }
 }

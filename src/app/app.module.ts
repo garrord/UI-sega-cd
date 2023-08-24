@@ -21,11 +21,14 @@ import { MusicComponent } from './components/music/music.component';
 import { BookContainer } from './containers/books/book.container';
 import { RetailContainer } from './containers/retail/retail.container';
 import { RetailComponent } from './components/retail/retail.component';
-import  {MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { ContentsContainer } from './containers/contents/contents.container';
 import { ContentComponent } from './components/contents/content.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BookDialog } from './components/dialogs/book.dialog.component';
+import { MatSortModule} from '@angular/material/sort';
+import { GeneralBooksContainer } from './containers/general-books/general-books.container';
+import { GeneralBookComponent } from './components/general-books/general-books.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { BookDialog } from './components/dialogs/book.dialog.component';
     RetailComponent,
     ContentsContainer,
     ContentComponent,
-    BookDialog
+    BookDialog,
+    GeneralBooksContainer,
+    GeneralBookComponent
   ],
   imports: [
     BrowserModule,
@@ -55,10 +60,12 @@ import { BookDialog } from './components/dialogs/book.dialog.component';
     MatTabsModule,
     MatButtonModule,
     MatDialogModule,
+    MatSortModule,
     RouterModule.forRoot([
       { path: 'games', component: GameTableContainer },
       { path: '', redirectTo: 'games', pathMatch: 'full' },
-      { path:  ':game', component: GameContainer }
+      { path: 'books', component: GeneralBooksContainer },
+      { path: ':game', component: GameContainer },
     ])
   ],
   providers: [

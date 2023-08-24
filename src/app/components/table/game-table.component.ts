@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
 import { VideoGameRetailModel } from "src/app/models/video-game-retail.model";
 import { BookDialog } from "../dialogs/book.dialog.component";
+import { MatSort } from "@angular/material/sort";
 
 @Component({
     selector: 'game-table-component',
@@ -11,14 +12,16 @@ import { BookDialog } from "../dialogs/book.dialog.component";
     styleUrls:['game-table.component.scss']
 })
 
-export class GameTableComponent implements OnInit {
+export class GameTableComponent implements OnInit, AfterViewInit {
 
     constructor(
         private router: Router,
-        private matDialog: MatDialog
+        private matDialog: MatDialog,
+        private cd: ChangeDetectorRef
     ){}
 
     @Input() games: VideoGameRetailModel[] = [];
+    @ViewChild(MatSort) sort!: MatSort;
 
     displayedColumns:string[] = [
         "title", 
@@ -37,18 +40,27 @@ export class GameTableComponent implements OnInit {
         this.dataSource.data = this.games;
     }
 
+    ngAfterViewInit():void{
+        this.dataSource.sort = this.sort;
+        this.sort.disableClear = true;
+        this.sort.sort({
+            id: 'title', 
+            start: 'asc',
+            disableClear: true
+        });
+        this.cd.detectChanges();
+    }
+
     navigateToGame(game: string){
+        let encoded = encodeURIComponent(game);
         this.router.navigate([`/${game}`])
     }
 
     openDialog():void{
         this.matDialog.open(BookDialog, {
             width: '30vw',
-            height: '20vh'
+            height: '20vh',
+            autoFocus: 'false'
         });
-    }
-
-    navigateToBooks():void{
-        console.log("hit")
     }
 }

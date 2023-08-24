@@ -12,13 +12,19 @@
         <retail-container></retail-container>
     </mat-tab>
     <mat-tab label="Books" *ngIf="videoGameDetails.hasBooks">
-        <book-container></book-container>
+        <book-container
+            [title]="title"
+        ></book-container>
     </mat-tab>
     <mat-tab label="Music" *ngIf="videoGameDetails.hasMusic">
-         <music-container></music-container>
+         <music-container
+            [title]="title"
+         ></music-container>
     </mat-tab>
     <mat-tab label="Contents" *ngIf="videoGameDetails.hasContents">
-        <contents-container></contents-container>
+        <contents-container
+            [title]="title"
+        ></contents-container>
    </mat-tab>
 </mat-tab-group>
 

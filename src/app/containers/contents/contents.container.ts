@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { ImageService } from "../../services/image.service";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { Subscription } from "rxjs";
@@ -18,6 +18,7 @@ export class ContentsContainer implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute
     ){}
 
+    @Input() title!: string | null;
     images: SafeUrl[] = [];
     isComplete: boolean = false;
     ids: number[] = [];
@@ -26,8 +27,8 @@ export class ContentsContainer implements OnInit, OnDestroy {
     content: number = ImageContentEnum.Books;
 
     ngOnInit(): void {
-        let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
-        this.contentIdsSubscription = this.imageService.getContentIds(title!).subscribe({
+        //let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
+        this.contentIdsSubscription = this.imageService.getContentIds(this.title!).subscribe({
             next:(x: number[]) => this.ids = x,
             error: (x: string) => console.log(x),
             complete: () => {
