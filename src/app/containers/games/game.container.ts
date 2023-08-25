@@ -24,7 +24,6 @@ export class GameContainer implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.title = this.activatedRoute.snapshot.paramMap.get('game');
-        //this.title = encodeURI(t!);
         this.gameDetailsSubscription = this.gameService.getVideoGameDetails(this.title!).subscribe({
             next: (x) => this.videoGameDetails = x,
             error: (x) => console.log(x),

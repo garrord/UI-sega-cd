@@ -23,18 +23,29 @@ export class RetailContainer implements OnInit, OnDestroy{
     frontImageSubscription!: Subscription;
     backImageSubscription!: Subscription;
     title!:string | null;
+    isAvailable: boolean = true;
 
     ngOnInit(): void {
         this.title = this.activateRoute.snapshot.paramMap.get('game');
         this.frontImageSubscription = this.imageService.getRetailImage(this.title!, true).subscribe({
-            next: (x) => {
-                const objectUrl = URL.createObjectURL(x);
-                const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
-                this.frontCoverImage = imageUrl;
+            next: (x: Blob) => {
+                if (x.size == 0){
+                    this.isAvailable = false;
+                }
+                else {
+                    const objectUrl = URL.createObjectURL(x);
+                    const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
+                    this.frontCoverImage = imageUrl;
+                }
             },
             error: (x) => console.log(x),
-            complete: () => {          
-                this.getBackCover();
+            complete: () => {        
+                if (this.isAvailable){
+                    this.getBackCover();
+                }
+                else {
+                    this.isComplete = true;
+                }  
             }
         });
     }
@@ -54,7 +65,11 @@ export class RetailContainer implements OnInit, OnDestroy{
     }
 
     ngOnDestroy(): void{
-        this.frontImageSubscription.unsubscribe();
-        this.backImageSubscription.unsubscribe();
+        if(this.frontImageSubscription){
+            this.frontImageSubscription.unsubscribe();
+        }
+        if( this.backImageSubscription){
+            this.backImageSubscription.unsubscribe();
+        }
     }
 }

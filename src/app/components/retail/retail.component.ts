@@ -8,6 +8,7 @@ import { SafeUrl } from "@angular/platform-browser";
 })
 
 export class RetailComponent{
+
     @Input() frontCoverImage!: SafeUrl;
     @Input() backCoverImage!: SafeUrl;
 }

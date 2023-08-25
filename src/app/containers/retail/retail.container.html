@@ -1,8 +1,14 @@
-<retail-component *ngIf="isComplete; else spinner"
-    [frontCoverImage]="frontCoverImage"
-    [backCoverImage]="backCoverImage"
-></retail-component>
-
-<ng-template #spinner>
+<ng-template [ngIf]="!isComplete">
     <mat-spinner></mat-spinner>
+</ng-template>
+
+<ng-template [ngIf]="isComplete && isAvailable">
+    <retail-component
+        [frontCoverImage]="frontCoverImage"
+        [backCoverImage]="backCoverImage"
+    ></retail-component>
+</ng-template>
+
+<ng-template [ngIf]="isComplete && !isAvailable">
+    Image not available
 </ng-template>

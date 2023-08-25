@@ -53,7 +53,7 @@ export class GameTableComponent implements OnInit, AfterViewInit {
 
     navigateToGame(game: string){
         let encoded = encodeURIComponent(game);
-        this.router.navigate([`/${game}`])
+        this.router.navigate([`/${encoded}`])
     }
 
     openDialog():void{

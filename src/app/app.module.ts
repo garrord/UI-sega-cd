@@ -29,6 +29,9 @@ import { BookDialog } from './components/dialogs/book.dialog.component';
 import { MatSortModule} from '@angular/material/sort';
 import { GeneralBooksContainer } from './containers/general-books/general-books.container';
 import { GeneralBookComponent } from './components/general-books/general-books.component';
+import { TestContainer } from './containers/testing/test.container';
+import { TestComponent } from './components/testing/test.component';
+import { UnavailableComponent } from './components/unavailable/unavailable.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,11 @@ import { GeneralBookComponent } from './components/general-books/general-books.c
     ContentComponent,
     BookDialog,
     GeneralBooksContainer,
-    GeneralBookComponent
+    GeneralBookComponent,
+    //testing below
+    TestContainer,
+    TestComponent,
+    UnavailableComponent
   ],
   imports: [
     BrowserModule,
