@@ -1,7 +1,9 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { ImageContentEnum } from "../enums/image-content.enum";
+import { MusicModel } from "../models/music.model";
+import { VariantModel } from "../models/variant.model";
 
 @Injectable()
 
@@ -19,8 +21,8 @@ export class ImageService{
         return this.http.get<number[]>(`${this.baseUrl}/getImageIds/${content}/${title}`);
     }
 
-    public getMusicIds(title: string): Observable<number[]>{
-        return this.http.get<number[]>(`${this.baseUrl}/getMusicIds/${title}`);
+    public getMusicIds(title: string): Observable<MusicModel[]>{
+        return this.http.get<MusicModel[]>(`${this.baseUrl}/getMusicIds/${title}`);
     }
 
     public getBookIds(title: string): Observable<number[]>{
@@ -47,11 +49,26 @@ export class ImageService{
         return this.http.get(`${this.baseUrl}/getContentImage/${id}`, { responseType:'blob' });
     }
 
-    getGeneralBookIds():Observable<number[]>{
+    public getGeneralBookIds():Observable<number[]>{
         return this.http.get<number[]>(`${this.baseUrl}/getGeneralBookIds`);
     }
 
-    getGeneralBookImage(id:number):Observable<Blob>{
+    public getGeneralBookImage(id:number):Observable<Blob>{
         return this.http.get(`${this.baseUrl}/getGeneralBookImage/${id}`, { responseType:'blob' });
+    }
+
+    public getVariantImages(name:string):Observable<VariantModel[]>{
+        return this.http.get<VariantModel[]>(`${this.baseUrl}/getVariants/${name}`);
+    }
+
+    private handleError(err: HttpErrorResponse){
+        let errorMessage = '';
+        if (err.error instanceof ErrorEvent) {
+            errorMessage = `an error occurred: ${err.error.message}`;
+        } else {
+            errorMessage = `Server returned code: ${err.status}, error message is: ${err.message} ;`
+        }
+        console.error(errorMessage);
+        return throwError(() => errorMessage);
     }
 }

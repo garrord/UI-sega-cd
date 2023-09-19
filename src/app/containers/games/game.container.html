@@ -19,16 +19,21 @@
     </mat-tab>
     <mat-tab label="Music" *ngIf="videoGameDetails.hasMusic">
          <test-container
-         [content]="'music'"
+            [content]="'music'"
             [title]="title"
          ></test-container>
     </mat-tab>
     <mat-tab label="Contents" *ngIf="videoGameDetails.hasContents">
         <test-container
-        [content]="'contents'"
+            [content]="'contents'"
             [title]="title"
         ></test-container>
    </mat-tab>
+   <mat-tab label="Variants" *ngIf="videoGameDetails.hasVariants">
+        <variants-container
+            [title]="title"
+        ></variants-container>
+</mat-tab>
 </mat-tab-group>
 
 <ng-template #spinner>

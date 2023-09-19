@@ -7,4 +7,5 @@ export class VideoGameRetailModel{
     publisher!:string;
     hasBooks!:boolean;
     hasMusic!:boolean;
+    hasVariant!:boolean;
 }

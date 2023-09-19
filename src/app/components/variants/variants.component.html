@@ -1,0 +1,15 @@
+<div *ngIf="variants.linkedVariants.length > 0" class="container">
+    <div *ngFor="let image of variants.linkedVariants">
+        <div class="flex-container">
+            <img class="images" [src]="image.image" alt="image">
+        </div>
+    </div>
+</div>
+
+<div *ngIf="variants.unlinkedVariants.length > 0" class="container">
+    <div *ngFor="let image of variants.unlinkedVariants">
+        <div class="flex-container">
+            <img class="images" [src]="image.image" alt="image">
+        </div>
+    </div>
+</div>

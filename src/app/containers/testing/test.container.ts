@@ -2,7 +2,9 @@ import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
-import { ImageService } from "src/app/services/image.service";
+import { ImageService } from "../../services/image.service";
+import { MusicModel } from "../../models/music.model";
+import { MusicImageModel } from "../../models/music-images.model";
 
 @Component({
     selector: 'test-container',
@@ -21,9 +23,16 @@ export class TestContainer implements OnInit, OnDestroy {
     title!: string | null;
     idSubscription!: Subscription;
     imageSubscription!: Subscription;
+    bookImageSubscription!: Subscription;
+    musicImageSubscription!:Subscription;
+    musicImageService!:Subscription
+    contentImageSubscription!:Subscription;
     ids:number[] = [];
+    musicModel:MusicModel[] = [];
     images: SafeUrl[] = [];
     isComplete:boolean = false;
+    musicImages:MusicImageModel[] = [];
+    isMusicComplete:boolean = false;
 
     ngOnInit(): void {
         this.title = this.activatedRoute.snapshot.paramMap.get('game');
@@ -40,7 +49,13 @@ export class TestContainer implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.idSubscription.unsubscribe();
-        this.imageSubscription.unsubscribe();
+        if (this.bookImageSubscription){
+            this.bookImageSubscription.unsubscribe();
+        }
+        if (this.musicImageSubscription){
+            this.musicImageSubscription.unsubscribe();
+        }
+        //this.imageSubscription.unsubscribe();
     }
 
     books():void{
@@ -75,11 +90,12 @@ export class TestContainer implements OnInit, OnDestroy {
 
     music():void{
         this.idSubscription = this.imageService.getMusicIds(this.title!).subscribe({
-            next: (x) => this.ids = x,
+            next: (x: MusicModel[]) => this.musicModel = x,
             error: (x) => console.log(x),
             complete: () => {
-                if (this.ids.length > 0){
-                    this.getImages(this.ids, 'music');
+                if (this.musicModel.length > 0){
+                    //this.getImages(this.ids, 'music');
+                    this.getMusicImages(this.musicModel);
                 }else{
                     this.isComplete = true;
                 }
@@ -87,11 +103,35 @@ export class TestContainer implements OnInit, OnDestroy {
         })
     }
 
+    getMusicImages(musicModels: MusicModel[]){
+        musicModels.forEach(musicModel => {
+            this.imageService.getMusicImage(musicModel.id).subscribe({
+                next: (blob: Blob) => {
+                    const objectUrl = URL.createObjectURL(blob);
+                    const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
+                    let mim = new MusicImageModel();
+                    mim.image = imageUrl;
+                    let mm = new MusicModel();
+                    mm.id = musicModel.id;
+                    mm.name = musicModel.name;
+                    mm.year = musicModel.year;
+                    mm.musicTracks = musicModel.musicTracks;
+                    mim.musicInfo = mm;
+                    this.musicImages.push(mim);
+
+                    //this.images.push(imageUrl);
+                },
+                error: (x) => console.log(x),
+                complete: () => this.isMusicComplete = true
+            });
+        })
+    }
+
     getImages(ids: number[], content:string){
         switch(content){
             case 'books' :
                 ids.forEach(id => {
-                    this.imageSubscription = this.imageService.getBookImage(id).subscribe({
+                    this.bookImageSubscription = this.imageService.getBookImage(id).subscribe({
                         next: (x: Blob) => { 
                             const objectUrl = URL.createObjectURL(x);
                             const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
@@ -102,22 +142,22 @@ export class TestContainer implements OnInit, OnDestroy {
                     })
                 });
             break;
-            case 'music' :
-                ids.forEach(id => {
-                    this.imageSubscription = this.imageService.getMusicImage(id).subscribe({
-                        next: (x: Blob) => { 
-                            const objectUrl = URL.createObjectURL(x);
-                            const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
-                            this.images.push(imageUrl);
-                        },
-                        error: (x) => console.log(x),
-                        complete: () => this.isComplete = true
-                    })
-                });
-            break;
+            // case 'music' :
+            //     ids.forEach(id => {
+            //         this.imageSubscription = this.imageService.getMusicImage(id).subscribe({
+            //             next: (x: Blob) => { 
+            //                 const objectUrl = URL.createObjectURL(x);
+            //                 const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
+            //                 this.images.push(imageUrl);
+            //             },
+            //             error: (x) => console.log(x),
+            //             complete: () => this.isComplete = true
+            //         })
+            //     });
+            // break;
             case 'contents' :
                 ids.forEach(id => {
-                    this.imageSubscription = this.imageService.getContentImage(id).subscribe({
+                    this.contentImageSubscription = this.imageService.getContentImage(id).subscribe({
                         next: (x: Blob) => { 
                             const objectUrl = URL.createObjectURL(x);
                             const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Subscription, catchError, map, throwError } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
-import { GameService } from "src/app/services/game.service";
-import { VideoGameDetailsModel } from "src/app/models/video-game-details.model";
+import { GameService } from "../../services/game.service";
+import { VideoGameDetailsModel } from "../../models/video-game-details.model";
 
 @Component({
     selector: 'game-container',
@@ -26,8 +26,15 @@ export class GameContainer implements OnInit, OnDestroy {
         this.title = this.activatedRoute.snapshot.paramMap.get('game');
         this.gameDetailsSubscription = this.gameService.getVideoGameDetails(this.title!).subscribe({
             next: (x) => this.videoGameDetails = x,
-            error: (x) => console.log(x),
-            complete: () => this.isComplete = true
+            error: (x) => {
+                if (x === 404){
+                    this.router.navigate(['/error-404']);
+                }
+            },
+            complete: () => {
+                console.log("completed!")
+                this.isComplete = true
+            }
         });
     }
 

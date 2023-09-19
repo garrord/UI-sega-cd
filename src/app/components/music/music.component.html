@@ -1,5 +1,16 @@
-<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
-    <div *ngFor="let imageUrl of images">
-        <img [src]="imageUrl" alt="image">
-    </div>  
+<div class="container">
+    <div *ngFor="let musicInfo of musicImages">
+        <div class="flex-container">
+            <img class="images" [src]="musicInfo.image" alt="image">
+            <div>
+                Name: {{ musicInfo.musicInfo.name }}
+            </div>
+            <div>
+                Year: {{ musicInfo.musicInfo.year == 0 ? '????' : musicInfo.musicInfo.year }}
+            </div>
+        </div>
+        <div *ngFor="let info of musicInfo.musicInfo.musicTracks">
+            {{ info.trackNumber }}. {{ info.songTitle }}
+        </div>
+    </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { SafeUrl } from "@angular/platform-browser";
+import { MusicImageModel } from "../../models/music-images.model";
 
 @Component({
     selector: 'music-component',
@@ -8,5 +8,9 @@ import { SafeUrl } from "@angular/platform-browser";
 })
 
 export class MusicComponent{
-    @Input() images: SafeUrl[] = [];
+    @Input() musicImages: MusicImageModel[] = [];
+
+    ngOnInit(){
+        this.musicImages;
+    }
 }

@@ -32,6 +32,9 @@ import { GeneralBookComponent } from './components/general-books/general-books.c
 import { TestContainer } from './containers/testing/test.container';
 import { TestComponent } from './components/testing/test.component';
 import { UnavailableComponent } from './components/unavailable/unavailable.component';
+import { VariantContainer } from './containers/variants/variants.container';
+import { VariantsComponent } from './components/variants/variants.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { UnavailableComponent } from './components/unavailable/unavailable.compo
     BookDialog,
     GeneralBooksContainer,
     GeneralBookComponent,
+    VariantContainer,
+    VariantsComponent,
+    NotFoundComponent,
     //testing below
     TestContainer,
     TestComponent,
@@ -70,6 +76,7 @@ import { UnavailableComponent } from './components/unavailable/unavailable.compo
     MatSortModule,
     RouterModule.forRoot([
       { path: 'games', component: GameTableContainer },
+      { path: 'error-404', component: NotFoundComponent },
       { path: '', redirectTo: 'games', pathMatch: 'full' },
       { path: 'books', component: GeneralBooksContainer },
       { path: ':game', component: GameContainer },

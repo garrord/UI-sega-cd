@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
-import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
-import { ImageService } from "src/app/services/image.service";
+import { ImageService } from "../../services/image.service";
+import { MusicModel } from "../../models/music.model";
 
 @Component({
     selector: 'music-container',
@@ -13,7 +13,6 @@ export class MusicContainer implements OnInit, OnDestroy{
     
     constructor(
         private imageService: ImageService,
-        private activatedRoute: ActivatedRoute,
         private sanitizer: DomSanitizer
     ){}
 
@@ -23,16 +22,16 @@ export class MusicContainer implements OnInit, OnDestroy{
     ids: number[] = [];
     images: SafeUrl[] = [];
     isComplete: boolean = false;
+    musicModel:MusicModel[] = [];
 
     ngOnInit(): void {
-        //let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
         this.musicIdSubscription = this.imageService.getMusicIds(this.title!).subscribe({
-            next: (x) => this.ids = x,
+            next: (x) => this.musicModel = x,
             error: (x) => console.log(x),
             complete: () => {
                 if (this.ids.length > 0){
                     this.getImages(this.ids);
-                }else{
+                } else {
                     this.isComplete = true;
                 }
             }

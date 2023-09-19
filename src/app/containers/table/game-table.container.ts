@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { VideoGameRetailModel } from "src/app/models/video-game-retail.model";
-import { GameService } from "src/app/services/game.service";
+import { VideoGameRetailModel } from "../../models/video-game-retail.model";
+import { GameService } from "../../services/game.service";
 
 @Component({
     selector: 'game-table',

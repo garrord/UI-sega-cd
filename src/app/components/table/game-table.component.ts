@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, ViewChild }
 import { MatDialog } from "@angular/material/dialog";
 import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
-import { VideoGameRetailModel } from "src/app/models/video-game-retail.model";
+import { VideoGameRetailModel } from "../../models/video-game-retail.model";
 import { BookDialog } from "../dialogs/book.dialog.component";
 import { MatSort } from "@angular/material/sort";
 
@@ -32,7 +32,8 @@ export class GameTableComponent implements OnInit, AfterViewInit {
         "usConsoleExclusive",
         "regionalAvailability",
         "books",
-        "music"
+        "music",
+        "variant"
     ];
     dataSource = new MatTableDataSource();
 
