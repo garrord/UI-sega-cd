@@ -3,11 +3,6 @@
 </div>
 
 <mat-tab-group *ngIf="isComplete; else spinner">
-    <!-- <mat-tab *ngIf="game!.variants.length > 0" label="Variants">
-        <div *ngFor="let variant of game!.variants">
-            <img src="{{ variant }}">
-        </div>
-    </mat-tab> -->
     <mat-tab label="Retail">
         <retail-container></retail-container>
     </mat-tab>

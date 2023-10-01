@@ -94,7 +94,6 @@ export class TestContainer implements OnInit, OnDestroy {
             error: (x) => console.log(x),
             complete: () => {
                 if (this.musicModel.length > 0){
-                    //this.getImages(this.ids, 'music');
                     this.getMusicImages(this.musicModel);
                 }else{
                     this.isComplete = true;
@@ -118,8 +117,6 @@ export class TestContainer implements OnInit, OnDestroy {
                     mm.musicTracks = musicModel.musicTracks;
                     mim.musicInfo = mm;
                     this.musicImages.push(mim);
-
-                    //this.images.push(imageUrl);
                 },
                 error: (x) => console.log(x),
                 complete: () => this.isMusicComplete = true
@@ -142,19 +139,6 @@ export class TestContainer implements OnInit, OnDestroy {
                     })
                 });
             break;
-            // case 'music' :
-            //     ids.forEach(id => {
-            //         this.imageSubscription = this.imageService.getMusicImage(id).subscribe({
-            //             next: (x: Blob) => { 
-            //                 const objectUrl = URL.createObjectURL(x);
-            //                 const imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
-            //                 this.images.push(imageUrl);
-            //             },
-            //             error: (x) => console.log(x),
-            //             complete: () => this.isComplete = true
-            //         })
-            //     });
-            // break;
             case 'contents' :
                 ids.forEach(id => {
                     this.contentImageSubscription = this.imageService.getContentImage(id).subscribe({

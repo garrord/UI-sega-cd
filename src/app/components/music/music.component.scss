@@ -1,3 +1,27 @@
-img{
-    width:25%;
+// .container {
+//     border: 5px green solid;
+// }
+
+// img{
+//     width:25%;
+// }
+.container{
+    border:1px green solid;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 'content content content';
+}
+
+.images {
+    border: 1px darkgray solid;
+    grid-area: content;
+    max-width:80%;  
+}
+
+.flex-container{
+    display:flex;
+    justify-content:center;
+    margin-top:1%;
+    margin-bottom:1%;
+    border:1px blue solid;
 }
