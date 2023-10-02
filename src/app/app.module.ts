@@ -35,6 +35,7 @@ import { UnavailableComponent } from './components/unavailable/unavailable.compo
 import { VariantContainer } from './containers/variants/variants.container';
 import { VariantsComponent } from './components/variants/variants.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     //testing below
     TestContainer,
     TestComponent,
-    UnavailableComponent
+    UnavailableComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +77,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatDialogModule,
     MatSortModule,
     RouterModule.forRoot([
+      { path: 'welcome', component: WelcomeComponent },
       { path: 'games', component: GameTableContainer },
       { path: 'error-404', component: NotFoundComponent },
       { path: '', redirectTo: 'games', pathMatch: 'full' },

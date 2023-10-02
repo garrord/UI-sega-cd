@@ -1,27 +1,53 @@
-// .container {
-//     border: 5px green solid;
-// }
-
-// img{
-//     width:25%;
-// }
-.container{
-    border:1px green solid;
+.grid-container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: 'content content content';
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 .images {
     border: 1px darkgray solid;
-    grid-area: content;
-    max-width:80%;  
+    max-width:80%;
 }
 
 .flex-container{
     display:flex;
-    justify-content:center;
-    margin-top:1%;
-    margin-bottom:1%;
-    border:1px blue solid;
+    flex-direction: column;
+    align-items:center;
+    grid-area: content;
+    // border:1px solid blue;
+}
+
+.music{
+    grid-area: content;
+}
+
+.info-container {
+    display:grid;
+    // border:1px solid green;
+}
+
+.number {
+    grid-area: number;
+}
+
+.title {
+    grid-area: title;
+}
+
+.game {
+    grid-area: game;
+}
+
+.tracks {
+    display:grid;
+    grid-template-columns: 0.5fr 1fr 1fr;
+    grid-template-areas: 'number title game';
+    column-gap: 10px;
+    // border:1px solid fuchsia;
+}
+
+.underline {
+    border-bottom: 1px solid lightgray;
 }

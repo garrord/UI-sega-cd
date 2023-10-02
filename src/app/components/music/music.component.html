@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div *ngFor="let musicInfo of musicImages">
         <img class="images" [src]="musicInfo.image" alt="image">
         <div style="border:1px solid blue;">
@@ -13,5 +13,30 @@
                 {{ info.trackNumber }}. {{ info.songTitle }}
             </div>
         </div>
+    </div>
+</div> -->
+
+<div class="grid-container">
+    <div *ngFor="let musicInfo of musicImages">
+        <div class="flex-container">
+            <img class="images" [src]="musicInfo.image" alt="image">
+            <div class="info-container">
+                <div>
+                    Name: {{ musicInfo.musicInfo.name }}
+                </div>
+                <div>
+                    Year: {{ musicInfo.musicInfo.year == 0 ? '????' : musicInfo.musicInfo.year }}
+                </div>
+                <div><b>Tracklist</b></div>
+                    <div *ngFor="let info of musicInfo.musicInfo.musicTracks">
+                        <div class="tracks underline" [ngStyle]="{ 'font-weight': info.isSegaCdRelated ? 'bold' : 'normal'}">
+                            <div class="number">{{ info.trackNumber }}</div>
+                            <div class="title">{{ info.songTitle }}</div>
+                            <div class="game">{{ info.game }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div>
     </div>
 </div>
