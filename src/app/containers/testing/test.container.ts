@@ -115,6 +115,7 @@ export class TestContainer implements OnInit, OnDestroy {
                     mm.name = musicModel.name;
                     mm.year = musicModel.year;
                     mm.musicTracks = musicModel.musicTracks;
+                    mm.isCompilation = musicModel.isCompilation
                     mim.musicInfo = mm;
                     this.musicImages.push(mim);
                 },

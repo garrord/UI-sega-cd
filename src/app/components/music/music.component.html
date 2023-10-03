@@ -32,7 +32,7 @@
                         <div class="tracks underline" [ngStyle]="{ 'font-weight': info.isSegaCdRelated ? 'bold' : 'normal'}">
                             <div class="number">{{ info.trackNumber }}</div>
                             <div class="title">{{ info.songTitle }}</div>
-                            <div class="game">{{ info.game }}</div>
+                            <div *ngIf="musicInfo.musicInfo.isCompilation" class="game">{{ info.game }}</div>
                         </div>
                     </div>
                 </div>

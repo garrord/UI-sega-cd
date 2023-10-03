@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { ImageContentEnum } from "../enums/image-content.enum";
 import { MusicModel } from "../models/music.model";
-import { VariantModel } from "../models/variant.model";
+import { VariantsModel } from "../models/variant.model";
 
 @Injectable()
 
@@ -57,8 +57,8 @@ export class ImageService{
         return this.http.get(`${this.baseUrl}/getGeneralBookImage/${id}`, { responseType:'blob' });
     }
 
-    public getVariantImages(name:string):Observable<VariantModel[]>{
-        return this.http.get<VariantModel[]>(`${this.baseUrl}/getVariants/${name}`);
+    public getVariantImages(name:string):Observable<VariantsModel>{
+        return this.http.get<VariantsModel>(`${this.baseUrl}/getVariants/${name}`);
     }
 
     private handleError(err: HttpErrorResponse){

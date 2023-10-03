@@ -3,6 +3,7 @@ export class MusicModel {
     name!:string;
     year!:number;
     musicTracks!:MusicTrackModel[];
+    isCompilation!:boolean;
 }
 
 export class MusicTrackModel{

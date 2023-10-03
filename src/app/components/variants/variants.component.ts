@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { VariantsModel } from "../../models/variants.model";
+import { VariantsModel } from "../../models/variant.model";
 
 @Component({
     selector: 'variants-component',
