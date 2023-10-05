@@ -9,7 +9,7 @@
 import { SafeUrl } from "@angular/platform-browser";
 
 export class VariantsModel {
-    linkedVariantModel!: LinkedVariantModel[];
+    linkedVariants!: LinkedVariantModel[];
     unlinkedVariants!: UnlinkedVariants;
 }
 

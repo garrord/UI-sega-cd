@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { VariantsModel } from "../../models/variant.model";
+import { UIVariantModel } from "src/app/models/ui-variant.model";
 
 @Component({
     selector: 'variants-component',
@@ -8,5 +8,9 @@ import { VariantsModel } from "../../models/variant.model";
 })
 
 export class VariantsComponent {
-    @Input() variants!: VariantsModel;
+    @Input() uiVariants!: UIVariantModel;
+
+    ngOnInit(): void {
+        this.uiVariants;
+    }
 }

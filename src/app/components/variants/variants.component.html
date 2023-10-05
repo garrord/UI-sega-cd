@@ -1,12 +1,21 @@
-<!-- <div *ngIf="variants.linkedVariants.length > 0" class="container">
-    <div *ngFor="let image of variants.linkedVariants">
+<div *ngIf="uiVariants.uiLinkedVariantModel && uiVariants.uiLinkedVariantModel.length > 0" class="container">
+    <div *ngFor="let image of uiVariants.uiLinkedVariantModel">
         <div class="flex-container">
-            <img class="images" [src]="image.image" alt="image">
+            <img class="images" [src]="image.discVariantImage" alt="image">
+        </div>
+        <div class="flex-container">
+            <img class="images" [src]="image.manualVariantImage" alt="image">
+        </div>
+        <div class="flex-container">
+            <img class="images" [src]="image.frontBoxVariantImage" alt="image">
+        </div>
+        <div class="flex-container">
+            <img class="images" [src]="image.backBoxVariantImage" alt="image">
         </div>
     </div>
 </div>
 
-<div *ngIf="variants.unlinkedVariants.length > 0" class="container">
+<!-- <div *ngIf="variants.unlinkedVariants.length > 0" class="container">
     <div *ngFor="let image of variants.unlinkedVariants">
         <div class="flex-container">
             <img class="images" [src]="image.image" alt="image">
