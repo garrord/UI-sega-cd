@@ -1,24 +1,65 @@
-<div *ngIf="uiVariants.uiLinkedVariantModel && uiVariants.uiLinkedVariantModel.length > 0" class="container">
+<!-- <div *ngIf="uiVariants.uiLinkedVariantModel && uiVariants.uiLinkedVariantModel.length > 0">
     <div *ngFor="let image of uiVariants.uiLinkedVariantModel">
-        <div class="flex-container">
-            <img class="images" [src]="image.discVariantImage" alt="image">
+        <div>
+            {{ image.description }}
         </div>
-        <div class="flex-container">
-            <img class="images" [src]="image.manualVariantImage" alt="image">
-        </div>
-        <div class="flex-container">
-            <img class="images" [src]="image.frontBoxVariantImage" alt="image">
-        </div>
-        <div class="flex-container">
-            <img class="images" [src]="image.backBoxVariantImage" alt="image">
-        </div>
-    </div>
-</div>
-
-<!-- <div *ngIf="variants.unlinkedVariants.length > 0" class="container">
-    <div *ngFor="let image of variants.unlinkedVariants">
-        <div class="flex-container">
-            <img class="images" [src]="image.image" alt="image">
+        <div class="container">
+            <div class="width" *ngIf="image.discVariantImage">
+                <img class="disc" [src]="image.discVariantImage" alt="image">
+            </div>
+            <div class="width" *ngIf="image.manualVariantImage">
+                <img class="manual" [src]="image.manualVariantImage" alt="image">
+            </div>
+            <div class="width" *ngIf="image.frontBoxVariantImage">
+                <img class="front" [src]="image.frontBoxVariantImage" alt="image">
+            </div>
+            <div class="width" *ngIf="image.backBoxVariantImage">
+                <img class="back" [src]="image.backBoxVariantImage" alt="image">
+            </div>
         </div>
     </div>
 </div> -->
+
+<!-- <div *ngIf="uiVariants.uiLinkedVariantModel && uiVariants.uiLinkedVariantModel.length > 0">
+    <div *ngFor="let image of uiVariants.uiLinkedVariantModel">
+        <div>
+            {{ image.description }}
+        </div>
+        <div class="container">
+            <img class="disc" *ngIf="image.discVariantImage" [src]="image.discVariantImage" alt="image">
+            <img class="manual" *ngIf="image.manualVariantImage" [src]="image.manualVariantImage" alt="image">
+            <img class="front" *ngIf="image.frontBoxVariantImage" [src]="image.frontBoxVariantImage" alt="image">
+            <img class="back" *ngIf="image.backBoxVariantImage" [src]="image.backBoxVariantImage" alt="image">
+        </div>
+    </div>
+</div> -->
+<div *ngIf="isComplete">
+    <div *ngIf="uiVariants.uiLinkedVariantModel && uiVariants.uiLinkedVariantModel.length > 0">
+        <div *ngFor="let variant of tempLinkedModel">
+            <div>
+                {{ variant.description }}
+            </div>
+            <div class="unlinked-container">
+                <div *ngFor="let image of variant.images">
+                    <div>
+                        <img class="content" [src]="image" alt="image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="uiVariants.uiUnlinkedVariantsModel && uiVariants.uiUnlinkedVariantsModel.unlinkedVariants.length > 0">
+        <div>
+            {{ uiVariants.uiUnlinkedVariantsModel.description }}
+        </div>
+        <div class="unlinked-container">
+            <div *ngFor="let image of uiVariants.uiUnlinkedVariantsModel.unlinkedVariants">
+                <div>
+                    <img class="content" [src]="image.image" alt="image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
