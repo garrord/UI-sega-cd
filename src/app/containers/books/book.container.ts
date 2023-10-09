@@ -27,7 +27,6 @@ export class BookContainer implements OnInit, OnDestroy {
     content: number = ImageContentEnum.Books;
 
     ngOnInit(): void {
-        //let title: string | null = this.activatedRoute.snapshot.paramMap.get('game');
         this.bookIdsSubscription = this.imageService.getBookIds(this.title!).subscribe({
             next:(x: number[]) => this.ids = x,
             error: (x: string) => console.log(x),

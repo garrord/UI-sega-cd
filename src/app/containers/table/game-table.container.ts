@@ -15,12 +15,19 @@ export class GameTableContainer implements OnInit, OnDestroy{
     games: VideoGameRetailModel[] = [];
     allGamesSubscription!: Subscription;
     isComplete: boolean = false;
+    session:string = "games";
 
     ngOnInit(): void {
+        if (sessionStorage.getItem('games') == 'true'){
+            console.log("session data!");
+        }
         this.allGamesSubscription = this.gameService.getAllGames().subscribe({
             next: (x) => this.games = x,
             error: (x) => console.log(x),
-            complete: () => this.isComplete = true
+            complete: () => {
+                sessionStorage.setItem('games', 'true');
+                this.isComplete = true
+            }
         });
     }
 

@@ -15,7 +15,7 @@ export class VariantsComponent {
 
     ngOnInit(): void {
         let index = 0;
-        this.uiVariants.uiLinkedVariantModel.forEach(x => {
+        this.uiVariants.uiLinkedVariantModel?.forEach(x => {
             let variant = new TempModel();
             variant.description = x.description;
             if (x.discVariantImage){
